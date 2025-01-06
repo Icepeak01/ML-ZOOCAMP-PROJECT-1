@@ -18,18 +18,15 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Install Python dependencies
-COPY requirements.txt /app/
+COPY app/requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Create a directory for the model (optional if already in repo)
-RUN mkdir -p /app/model
-
 # Copy the rest of your application code, including the model
-COPY . /app/
+COPY app/ /app/
 
 # Expose the port Flask is running on
 EXPOSE 8080
 
 # Define the default command to run the app
-CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers=1 --threads=1 --timeout=120
+CMD gunicorn app.app:app --bind 0.0.0.0:$PORT --workers=1 --threads=1 --timeout=120

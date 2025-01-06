@@ -1,8 +1,10 @@
+# app/utils.py
+
 import tensorflow as tf
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 import os
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 def load_model(model_path):
     """
@@ -11,7 +13,6 @@ def load_model(model_path):
     model = tf.keras.models.load_model(model_path)
     return model
 
-
 def preprocess_image(img_path, target_size=(224, 224)):
     """
     Loads and preprocesses the image.
@@ -19,7 +20,7 @@ def preprocess_image(img_path, target_size=(224, 224)):
     img = tf.keras.preprocessing.image.load_img(img_path, target_size=target_size)
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array = tf.keras.applications.resnet50.preprocess_input(img_array)
+    img_array = preprocess_input(img_array)  # MobileNetV2 preprocessing
     return img_array
 
 def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None):
