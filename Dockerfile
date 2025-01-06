@@ -22,22 +22,14 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Install gdown to download the model from Google Drive
-RUN pip install gdown
-
-# Create a directory for the model
+# Create a directory for the model (optional if already in repo)
 RUN mkdir -p /app/model
 
-# Download the model from Google Drive
-RUN gdown --no-cookies "https://drive.google.com/uc?id=1VZwYi8BLCz3mvE4aXyP5lDaWte6-AOvm" -O /app/model/mobilenetv2_pneumonia_model.h5
-
-# Copy the rest of your application code
+# Copy the rest of your application code, including the model
 COPY . /app/
 
 # Expose the port Flask is running on
 EXPOSE 8080
 
 # Define the default command to run the app
-#CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:$PORT", "--timeout", "120"]
 CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers=1 --threads=1 --timeout=120
-
