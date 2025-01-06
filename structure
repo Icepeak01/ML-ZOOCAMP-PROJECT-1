@@ -1,0 +1,26 @@
+mlzoomcampproject1/
+│
+├── app/
+│   ├── static/
+│   │   ├── uploads/           # Directory where uploaded images are stored
+│   │   └── gradcam/           # Directory for Grad-CAM processed images
+│   │
+│   ├── templates/
+│   │   ├── index.html         # Main page to upload images
+│   │   └── result.html        # Page to display the prediction results
+│   │
+│   ├── model/
+│   │   └── mobilenetv2_pneumonia_model.h5  # Trained MobileNetV2 model (~11.3MB)
+│   │
+│   ├── utils.py               # Utility functions for model loading and image processing
+│   ├── app.py                 # Main Flask application file
+│   └── requirements.txt       # Python dependencies
+│
+├── scripts/
+│   ├── train.py                # Script for training the model
+│   └── predict.py              # Script for making predictions (optional)
+│
+├── Dockerfile                  # Docker configuration file
+├── README.md                   # Project overview and instructions
+├── notebook.ipynb              # Jupyter Notebook for EDA and model training
+└── .gitignore                  # Specifies intentionally untracked files to ignore
