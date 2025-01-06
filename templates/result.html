@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detection Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #0000001a;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h2 {
+            color: #007bff;
+        }
+        .result {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result h3 {
+            color: #28a745;
+        }
+        .images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .images div {
+            flex: 1 1 45%;
+            margin: 10px;
+        }
+        .images img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px 0px #0000001a;
+        }
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-group a {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Detection Result</h2>
+        </div>
+        <div class="result">
+            <h3>{{ prediction_text }}</h3>
+        </div>
+        <div class="images">
+            <div>
+                <h5>Original Image</h5>
+                <img src="{{ original_image }}" alt="Original Image">
+            </div>
+            <div>
+                <h5>Grad-CAM</h5>
+                <img src="{{ gradcam_image }}" alt="Grad-CAM Image">
+            </div>
+        </div>
+        <div class="btn-group">
+            <a href="/" class="btn btn-secondary">Upload Another Image</a>
+        </div>
+    </div>
+</body>
+</html>

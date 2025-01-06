@@ -1,0 +1,117 @@
+Project Overview
+Pneumonia Detection Using Convolutional Neural Networks (CNNs)
+1. Introduction
+Pneumonia remains a significant global health challenge, particularly among pediatric populations. Early and accurate detection is crucial for effective treatment and management. This project leverages deep learning, specifically Convolutional Neural Networks (CNNs), to develop an automated system for pneumonia detection from chest X-ray images. By integrating explainability techniques, the system not only provides diagnostic predictions but also visual insights into the decision-making process, enhancing trust and usability for medical professionals.
+
+2. Objectives
+Primary Objective:
+Develop a CNN-based model to classify chest X-ray images into two categories: Pneumonia and Normal.
+Secondary Objectives:
+Achieve high classification accuracy and robustness using transfer learning.
+Implement explainability methods (Grad-CAM) to visualize and interpret model predictions.
+Deploy the trained model as a web application using Flask and Render, with serverless functions on AWS Lambda for scalability and efficiency.
+3. Dataset Description
+Source: Kaggle Chest X-Ray Pneumonia Dataset
+
+Organization:
+
+Folders: train, test, val
+Categories: Pneumonia, Normal
+Content:
+
+Total Images: 5,863 JPEG images
+Patient Demographics: Pediatric patients aged one to five years old from Guangzhou Women and Children’s Medical Center, Guangzhou.
+Quality Control:
+Initial screening to remove low-quality or unreadable scans.
+Diagnoses graded by two expert physicians.
+Evaluation set cross-checked by a third expert to mitigate grading errors.
+4. Methodology
+4.1 Data Preprocessing
+Image Loading and Organization:
+
+Images are organized into respective folders (Pneumonia, Normal) within train, test, and val directories.
+Resizing:
+
+All images are resized to 224x224 pixels to match the input requirements of pre-trained CNN architectures.
+Normalization:
+
+Pixel values are scaled to a range of 0-1 by dividing by 255.
+Data Augmentation:
+
+Techniques such as rotations, horizontal flips, zooming, and shifting are applied to increase dataset diversity and prevent overfitting.
+Train-Validation-Test Split:
+
+Training: 70%
+Validation: 15%
+Testing: 15%
+Ensured balanced class distribution across splits.
+4.2 Model Development
+Architecture:
+
+Utilized Transfer Learning with the ResNet50 architecture pre-trained on ImageNet.
+Custom Layers Added:
+Global Average Pooling: Reduces feature dimensions.
+Dense Layer: 1024 units with ReLU activation.
+Dropout Layer: 50% dropout for regularization.
+Output Layer: Single neuron with sigmoid activation for binary classification.
+Training:
+
+Optimizer: Adam
+Loss Function: Binary Cross-Entropy
+Metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC
+Callbacks:
+Early Stopping (monitoring validation loss)
+Model Checkpoint (saving best model)
+Reduce Learning Rate on Plateau
+Fine-Tuning:
+
+Unfroze the last 10 layers of ResNet50.
+Re-trained with a lower learning rate (1e-5) to fine-tune model weights.
+4.3 Explainability
+Grad-CAM (Gradient-weighted Class Activation Mapping):
+Implemented Grad-CAM to generate heatmaps highlighting regions in the chest X-ray images that influenced the model’s predictions.
+Enhanced interpretability and provided visual insights for medical professionals.
+4.4 Deployment
+Frameworks and Tools:
+
+Flask: Developed a web application interface for model interaction.
+Render: Hosted the Flask application for accessibility.
+AWS Lambda: Utilized for serverless deployment, ensuring scalability and efficient handling of requests.
+Features:
+
+Image Upload: Users can upload chest X-ray images for classification.
+Prediction Display: Shows whether pneumonia is detected with confidence scores.
+Grad-CAM Visualization: Displays heatmaps alongside original images to explain model predictions.
+5. Results and Evaluation
+Performance Metrics:
+
+Accuracy: Achieved [Insert Accuracy]% on the test set.
+Precision: [Insert Precision]%
+Recall (Sensitivity): [Insert Recall]%
+F1-Score: [Insert F1-Score]%
+ROC-AUC: [Insert ROC-AUC]%
+Confusion Matrix:
+
+Visualized true positives, true negatives, false positives, and false negatives to assess model performance comprehensively.
+ROC Curve:
+
+Illustrated the trade-off between sensitivity and specificity, with an area under the curve indicating robust classification capability.
+Explainability Insights:
+
+Grad-CAM heatmaps effectively highlighted relevant regions in the chest X-rays, aligning with clinical indicators of pneumonia.
+6. Deployment and Usage
+Web Application:
+
+Accessible via [Insert Render App URL].
+Allows users to upload chest X-ray images and receive immediate predictions with visual explanations.
+Scalability:
+
+Deployed using AWS Lambda ensures the application can handle multiple concurrent requests efficiently.
+7. Conclusion
+This project successfully demonstrates the application of CNNs in medical image classification, specifically for pneumonia detection. By incorporating transfer learning and explainability techniques, the model not only achieves high accuracy but also provides interpretable insights, making it a valuable tool for medical professionals. The deployment on AWS Lambda and Render ensures the solution is scalable and accessible, bridging the gap between model development and real-world application.
+
+8. Future Work
+Expand Dataset: Incorporate more diverse datasets to enhance model generalization.
+Multi-Class Classification: Extend the model to detect multiple thoracic diseases simultaneously.
+Enhanced Explainability: Integrate additional explainability techniques like SHAP or LIME for comprehensive model interpretation.
+User Interface Improvements: Enhance the web application with better UI/UX features and additional functionalities.

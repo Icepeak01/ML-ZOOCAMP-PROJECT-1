@@ -1,0 +1,11 @@
+# requirements.txt
+
+Flask
+tensorflow==2.17.1
+numpy
+opencv-python
+matplotlib
+seaborn
+Pillow
+Werkzeug
+gunicorn
